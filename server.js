@@ -3,77 +3,34 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const uuid = require('uuid');
 
+const addtodo = require('./controllers/addTodo');
+const addDone = require('./controllers/addDone');
+const deleteTodo = require('./controllers/deleteTodo');
+const deleteDone = require('./controllers/deleteDone');
+
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 
 const db = {
-  todo: [{ id: 1, name: 'TASK n1' }],
+  todo: [{ id: 1, name: 'TASK n1' }, { id: 5, name: 'ggggg' }],
   done: [{ id: 2, name: 'TASK n2' }],
 };
 
-// const db = {
-//   todo: ['task1'],
-//   done: ['task2'],
-// };
+app.get('/', (req, res) => res.json(db));
 
-app.get('/', (req, res) => {
-  // res.send('hello there');
-  res.json(db);
-});
+app.post('/addtodo', (req, res) => addtodo.handleAddTodo(req, res, db));
 
-app.post('/addtodo', (req, res) => {
-  // let newTodo = { id: uuid(), name: req.body.newTodo };
-  let newTodo = req.body.newTodo;
+app.post('/adddone', (req, res) => addDone.handleAddDone(req, res, db));
 
-  if (newTodo.name) {
-    db.todo.push(newTodo);
-    res.json(newTodo);
-  } else {
-    res.status(400).json('Entry not valid');
-  }
+app.delete('/deletetodo/:id', (req, res) =>
+  deleteTodo.handleDeleteTodo(req, res, db),
+);
 
-  console.log(db, 'todo');
-});
+app.delete('/deletedone/:id', (req, res) =>
+  deleteDone.handleDeleteDone(req, res, db),
+);
 
-app.post('/adddone', (req, res) => {
-  // let newDone = { id: uuid(), name: req.body.newDone };
-  let newDone = req.body.newDone;
-
-  let newTodo = db.todo.filter(item => item.id !== newDone.id);
-
-  db.todo = newTodo;
-  db.done.push(newDone);
-
-  console.log(db, 'done');
-
-  res.redirect('/');
-});
-
-// app.delete('/todoDelete/:id', (req, res) => {
-//   let itemId = req.params.id;
-
-//   console.log(db.todo, 'before del');
-
-//   let newList = db.todo.filter(item => item.id === itemId);
-//   db.todo = newList;
-
-//   console.log(db.todo, 'from delete..');
-
-//   res.redirect('/');
-// });
-
-// app.delete('/doneDelete/:id', (req, res) => {
-//   let itemId = req.params.id;
-
-//   let newList = db.done.filter(item => item.id === itemId);
-//   db.done = newList;
-
-//   console.log(db.done, 'from delete..');
-
-//   res.redirect('/');
-// });
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Listeing on port: ${PORT}..`));

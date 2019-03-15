@@ -14,8 +14,16 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = {
-  todo: [{ id: 1, name: 'TASK n1' }, { id: 5, name: 'ggggg' }],
-  done: [{ id: 2, name: 'TASK n2' }],
+  users: [
+    {
+      id: null,
+      name: '',
+      email: '',
+      password: '',
+      todo: [{ id: 1, name: 'TASK n1' }, { id: 5, name: 'ggggg' }],
+      done: [{ id: 2, name: 'TASK n2' }],
+    },
+  ],
 };
 
 app.get('/', (req, res) => res.json(db));

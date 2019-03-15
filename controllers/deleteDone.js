@@ -1,8 +1,9 @@
 const handleDeleteDone = (req, res, db) => {
   let itemId = Number(req.params.id);
 
-  let newList = db.done.filter(item => item.id !== itemId);
-  db.done = newList;
+  let newList = db.users[0].done.filter(item => item.id !== itemId);
+  db.users[0].done = newList;
+  console.log(db.users[0]);
 
   res.json(`Deleted item with id: ${itemId}`);
 };

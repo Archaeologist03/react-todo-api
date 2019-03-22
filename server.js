@@ -5,6 +5,7 @@ const uuid = require('uuid');
 const mongoose = require('mongoose');
 
 const listRoutes = require('./routes/list');
+const doneRoutes = require('./routes/done');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(listRoutes);
+app.use(doneRoutes);
 
 // const db = {
 //   users: [

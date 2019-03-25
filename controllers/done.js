@@ -24,7 +24,10 @@ exports.addDone = (req, res, db) => {
         });
       });
     } else {
-      res.json(existMessage);
+      res.json({
+        item: { name: null },
+        message: existMessage,
+      });
     }
   });
 };

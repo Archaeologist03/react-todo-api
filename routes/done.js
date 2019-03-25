@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post('/adddone', listController.addDone);
 
-router.post('/deletedone/:id', listController.deleteDone);
+router.delete('/deletedone/:id', listController.deleteDone);
 
 module.exports = router;

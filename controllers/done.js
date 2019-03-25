@@ -34,13 +34,12 @@ exports.addDone = (req, res, db) => {
 
 // Delete item from done
 exports.deleteDone = (req, res, db) => {
-  let itemId = Number(req.params.id);
+  let itemId = req.params.id;
 
-  Done.deleteMany({ name: '' });
+  Done.findByIdAndDelete({ _id: itemId }).then(response => {
+    res.json(`Deleted item with id: ${itemId}`);
+  });
 
-  let newList = db.users[0].done.filter(item => item.id !== itemId);
-  db.users[0].done = newList;
-  console.log(db.users[0]);
-
-  res.json(`Deleted item with id: ${itemId}`);
+  // let newList = db.users[0].done.filter(item => item.id !== itemId);
+  // db.users[0].done = newList;
 };

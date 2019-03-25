@@ -22,6 +22,8 @@ exports.addTodo = (req, res, db) => {
   if (newTodo.name) {
     List.find({ name: newTodo.name })
       .then(response => {
+        // Checks if item doesn't exist in list and add it to list.
+        // Otherwise send 400 bad req.
         if (!response[0]) {
           const list = new List({ name: newTodo.name });
           list
@@ -42,7 +44,6 @@ exports.addTodo = (req, res, db) => {
 
 exports.deleteTodo = (req, res, db) => {
   let itemId = req.params.id;
-
   List.findByIdAndDelete({ _id: itemId }).then(response => {
     res.json(`Deleted item with id: ${itemId}`);
   });

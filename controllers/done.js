@@ -19,7 +19,7 @@ exports.addDone = (req, res, db) => {
       const done = new Done({ name: newDone.name });
       done.save().then(response => {
         res.json({
-          item: newDone,
+          item: response,
           message: `Added to done list, item: ${newDone.name}`,
         });
       });
@@ -35,7 +35,6 @@ exports.addDone = (req, res, db) => {
 // Delete item from done
 exports.deleteDone = (req, res, db) => {
   let itemId = req.params.id;
-
   Done.findByIdAndDelete({ _id: itemId }).then(response => {
     res.json(`Deleted item with id: ${itemId}`);
   });

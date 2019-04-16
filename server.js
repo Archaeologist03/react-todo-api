@@ -33,7 +33,7 @@ app.use(doneRoutes);
 const PORT = process.env.PORT || 5000;
 
 const mongoDB =
-  'mongodb+srv://ilija:bandera123@cluster0-cyaw7.mongodb.net/todo?retryWrites=true';
+  'mongodb+srv://ilija:bandera@cluster0-cyaw7.mongodb.net/todo?retryWrites=true';
 mongoose.connect(mongoDB, { useNewUrlParser: true }).then(res => {
   app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 });

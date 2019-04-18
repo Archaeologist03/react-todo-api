@@ -30,13 +30,13 @@ app.use(doneRoutes);
 
 // app.get('/', (req, res) => res.json(db));
 
-
 const PORT = process.env.PORT || 5000;
 
-const mongoDB =
-  'mongodb+srv://ilija:bandera@cluster0-cyaw7.mongodb.net/todo-app?retryWrites=true';
+const mongoURI =
+  'mongodb+srv://ilija:bandera@cluster0-cyaw7.mongodb.net/todo?retryWrites=true';
+
 mongoose
-  .connect(mongoDB, { useNewUrlParser: true })
+  .connect(mongoURI, { useNewUrlParser: true })
   .then(res => {
     app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
   })

@@ -33,7 +33,7 @@
     "url": "https://github.com/Archaeologist03/react-todo-api/issues"
   },
   "engines": {
-    "node": "11.x"
+    "node": "11.14.0"
   },
   "homepage": "https://github.com/Archaeologist03/react-todo-api"
 }

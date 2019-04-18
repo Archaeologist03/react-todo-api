@@ -33,7 +33,7 @@ app.use(doneRoutes);
 const PORT = process.env.PORT || 5000;
 
 const mongoURI =
-  'mongodb+srv://ilija:bandera123@cluster0-5t3aa.mongodb.net/test?retryWrites=true';
+  'mongodb+srv://ilija:bandera123@cluster0-5t3aa.mongodb.net/todo?retryWrites=true';
 
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })

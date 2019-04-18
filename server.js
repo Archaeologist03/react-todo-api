@@ -32,8 +32,14 @@ app.use(doneRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-const mongoDB =
-  'mongodb+srv://ilija:bandera@cluster0-cyaw7.mongodb.net/todo?retryWrites=true';
-mongoose.connect(mongoDB, { useNewUrlParser: true }).then(res => {
-  app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
-});
+const mongoURI =
+  'mongodb+srv://ilija:bandera123@cluster0-5t3aa.mongodb.net/todo?retryWrites=true';
+
+mongoose
+  .connect(mongoURI, { useNewUrlParser: true })
+  .then(res => {
+    app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
+  })
+  .catch(err => {
+    console.log('erroring', err);
+  });

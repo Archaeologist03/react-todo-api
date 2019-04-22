@@ -1,13 +1,14 @@
 const express = require('express');
 
 const listController = require('../controllers/list');
+const isAuth = require('../middleware/isAuth');
 
 const router = express.Router();
 
-router.get('/', listController.getIndex);
+router.get('/', isAuth, listController.getIndex);
 
-router.post('/addtodo', listController.addTodo);
+router.post('/addtodo', isAuth, listController.addTodo);
 
-router.delete('/deletetodo/:id', listController.deleteTodo);
+router.delete('/deletetodo/:id', isAuth, listController.deleteTodo);
 
 module.exports = router;

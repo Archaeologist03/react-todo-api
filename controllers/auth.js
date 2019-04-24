@@ -4,6 +4,8 @@ const config = require('config');
 
 const User = require('../models/user');
 
+const jwtSecret = process.env.JWT_SECRET || config.get('jwtSecret');
+
 // POST LOGIN CONTROLLER
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -26,7 +28,7 @@ exports.login = async (req, res, next) => {
   }
 
   try {
-    const token = jwt.sign({ id: user.id }, config.get('jwtSecret'), {
+    const token = jwt.sign({ id: user.id }, jwtSecret, {
       expiresIn: 3600,
     });
     res.json({
@@ -71,7 +73,7 @@ exports.signup = async (req, res, next) => {
       newUser.save().then(user => {
         // setting JWT
         try {
-          const token = jwt.sign({ id: user.id }, config.get('jwtSecret'), {
+          const token = jwt.sign({ id: user.id }, jwtSecret, {
             expiresIn: 3600,
           });
           res.json({

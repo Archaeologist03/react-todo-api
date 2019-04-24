@@ -14,7 +14,7 @@ app.use('/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 5000;
 
-const mongoURI = config.get('mongoURI');
+const mongoURI = process.env.MONGO_URI || config.get('mongoURI');
 
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true })

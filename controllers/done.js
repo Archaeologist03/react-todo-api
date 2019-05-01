@@ -1,44 +1,38 @@
 const Done = require('../models/done');
 const List = require('../models/list');
 
-exports.addDone = (req, res, db) => {
+// POST - ADD ITEM TO DONE LIST
+exports.addDone = async (req, res, next) => {
   let newDone = req.body.newDone;
   const existMessage = { message: 'Item already exist in done list.' };
 
   // Find name sent from client in List and delete all of the occurrences of that name from list.
   // Client by clicking on done sending request (no point to keep items with same name, so deleteMany it is.)
   // Send response to client with newly added item and message.
-  List.find({ name: newDone.name }).then(response => {
-    List.deleteMany({ name: newDone.name }).then(response => response);
-  });
+  await List.deleteMany({ name: newDone.name });
+
   // Find item with the name of item sent from client.
   // If it doesn't exist, create item with that name and save it to db.
   // Then sent res to client with new done item obj.
-  Done.find({ name: newDone.name }).then(response => {
-    if (!response[0]) {
-      const done = new Done({ name: newDone.name });
-      done.save().then(response => {
-        res.json({
-          item: response,
-          message: `Added to done list, item: ${newDone.name}`,
-        });
-      });
-    } else {
-      res.json({
-        item: { name: null },
-        message: existMessage,
-      });
-    }
-  });
+  const findDoneResData = await Done.find({ name: newDone.name });
+  if (!findDoneResData[0]) {
+    const done = new Done({ name: newDone.name });
+    const doneSavedRes = await done.save();
+    res.json({
+      item: doneSavedRes,
+      message: `Added to done list, item: ${newDone.name}`,
+    });
+  } else {
+    res.json({
+      item: { name: null },
+      message: existMessage,
+    });
+  }
 };
 
-// Delete item from done
-exports.deleteDone = (req, res, db) => {
+// DELETE - DELETE ITEM FROM DONE LIST
+exports.deleteDone = async (req, res, next) => {
   let itemId = req.params.id;
-  Done.findByIdAndDelete({ _id: itemId }).then(response => {
-    res.json(`Deleted item with id: ${itemId}`);
-  });
-
-  // let newList = db.users[0].done.filter(item => item.id !== itemId);
-  // db.users[0].done = newList;
+  await Done.findByIdAndDelete({ _id: itemId });
+  res.json(`Deleted item with id: ${itemId}`);
 };

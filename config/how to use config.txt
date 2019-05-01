@@ -1,0 +1,9 @@
+#1 
+Create default.json file in config folder.
+
+#2
+Add the fallowing to default.json file:
+{
+  "mongoURI": "<Your mongoURI",
+  "jwtSecret": "<JWT Secret>"
+}

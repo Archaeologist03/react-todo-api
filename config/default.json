@@ -1,4 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://ilija:bandera123@cluster0-5t3aa.mongodb.net/todo?retryWrites=true",
-  "jwtSecret": "tasker-jwt-secret123"
-}

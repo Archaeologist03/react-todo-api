@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 const jwtSecret = process.env.JWT_SECRET || config.get('jwtSecret');
 
-// GET USER - LOAD USER
+// POST loadUser CONTROLLER - LOAD USER
 exports.loadUser = async (req, res, next) => {
   const userId = req.params.id;
   const user = await User.findById(userId)

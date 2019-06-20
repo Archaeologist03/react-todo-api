@@ -8,7 +8,7 @@ const isAuth = require('../middleware/isAuth');
 const router = express.Router();
 
 // LOAD USER (by id stored in ls)
-router.get('/loaduser/:id', isAuth, authController.loadUser);
+router.post('/loaduser/:id', isAuth, authController.loadUser);
 
 // LOGIN USER
 router.post(

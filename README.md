@@ -1,5 +1,5 @@
 ##### 1) Clone repo:
-`https://github.com/Archaeologist03/react-todo-api`
+`git clone https://github.com/Archaeologist03/react-todo-api`
 
 ##### 2) Install needed packages
 `npm install`
